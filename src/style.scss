@@ -1,0 +1,87 @@
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+
+body, div#page {  /* Will not work on IE if body is ommitted */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+div#content {
+    flex-grow: 1;
+}
+
+.posts-title, .navbar {
+    padding-left: 1rem;
+}
+
+.navbar {
+    border-bottom: 1px solid #eaeaea;
+}
+
+.site-content-contain {
+    background-color: transparent !important;
+    margin-top: 60px;
+}
+.site-content-contain #content, .navigation-top {
+    background-color: #fff;
+    width: 75%;
+    margin: 0 auto;
+}
+@media screen and (min-width: 48em) {
+    .site-content {
+        padding: 2.5em 0 0;
+    }
+}
+footer#colophon {
+    background-color: #fff;
+}
+
+.aseel-front-page.has-header-image .custom-header-media,
+.aseel-front-page.has-header-video .custom-header-media,
+.home.blog.has-header-image .custom-header-media,
+.home.blog.has-header-video .custom-header-media {
+	height: 25vh !important;
+}
+
+#primary #main .post {
+    clear: left;
+    float: left;
+    width: 100%;
+}
+
+.post-excerpt {
+    background: #f4f4f4;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+#loader {
+    text-align: center;
+    display: none;
+}
+#loader.active {
+    display: block;
+}
+
+.card-group .col-sm-4 {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.5s ease-out;
+}
+.card-group .col-sm-4.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card-group .col-sm-4 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.loader-gif {
+    text-align: center;
+    margin-top: 10em;
+}

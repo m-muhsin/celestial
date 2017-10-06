@@ -1,0 +1,36 @@
+{
+  "name": "celestial",
+  "version": "1.0.0",
+  "description": "A basic theme using the WordPress REST API and React",
+  "main": "index.js",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "file-loader": "^1.1.5",
+    "image-webpack-loader": "^3.4.2",
+    "node-sass": "^4.5.3",
+    "path": "^0.12.7",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "blog",
+    "decoupled",
+    "react",
+    "rest-api"
+  ],
+  "author": "Muhammad Muhsin",
+  "license": "GPL-3.0"
+}
