@@ -42,7 +42,7 @@ class App extends React.Component {
         jQuery("#loader").addClass("active");
         this.setState({ page: this.state.page + 1 });
 
-        fetch("http://localhost/mtwoblog/wp-json/wp/v2/posts/?page=" + this.state.page)
+        fetch("http://localhost/celestial/wp-json/wp/v2/posts/?page=" + this.state.page)
             .then(function (response) {
                 for (var pair of response.headers.entries()) {
                     if (pair[0] == 'x-wp-totalpages') {
@@ -59,26 +59,15 @@ class App extends React.Component {
             })
             .then(function (results) {
                 jQuery.each(results, function (i, post) {
-                    // var imgUrl;
-                    
-                    //     fetch("http://localhost/mtwoblog/wp-json/wp/v2/media/" + post.featured_media)
-                    //         .then(function (response) {
-                    //             return response.json();
-                    //     })
-                    //     .then(function (res) {
-                    //         imgUrl = res.media_details.sizes.medium_large.source_url;
-
                         jQuery(".card-group")
                             .append(
                                 `<div class="col-sm-4">
                                     <div class="card">
-                                        <img class="card-img-top" src=${Placeholder} alt="Featured Image" />
+                                        <img class="card-img-top" src=${post.featured_image_src ? post.featured_image_src : Placeholder} alt="Featured Image" />
                                         <div class="card-body">
-                                            
-                                                <h4 class="card-title"><a href="${post.link}">${post.title.rendered}</a></h4>
-                                                <p class="card-text">${post.excerpt.rendered}</p>
-                                                <p class="card-text"><small class="text-muted">${post.date}</small></p>
-                                            
+                                            <h4 class="card-title"><a href="${post.link}">${post.title.rendered}</a></h4>
+                                            <p class="card-text"><small class="text-muted">${post.author_name} &ndash; ${post.published_date}</small></p>
+                                            <p class="card-text">${post.excerpt.rendered}</p>
                                         </div>
                                     </div>
                                 </div>`
