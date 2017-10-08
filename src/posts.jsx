@@ -38,7 +38,7 @@ class Posts extends React.Component {
         jQuery("#loader").addClass("active");
         this.setState({ page: this.state.page + 1 });
 
-        fetch("http://localhost/celestial/wp-json/wp/v2/posts/?page=" + this.state.page)
+        fetch(CelestialSettings.URL.api + "/posts/?page=" + this.state.page)
             .then(function (response) {
                 for (var pair of response.headers.entries()) {
                     if (pair[0] == 'x-wp-totalpages') {

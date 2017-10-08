@@ -25711,7 +25711,7 @@ var Posts = function (_React$Component) {
             jQuery("#loader").addClass("active");
             this.setState({ page: this.state.page + 1 });
 
-            fetch("http://localhost/celestial/wp-json/wp/v2/posts/?page=" + this.state.page).then(function (response) {
+            fetch(CelestialSettings.URL.api + "/posts/?page=" + this.state.page).then(function (response) {
                 var _iteratorNormalCompletion = true;
                 var _didIteratorError = false;
                 var _iteratorError = undefined;
@@ -25841,24 +25841,28 @@ var Post = function (_React$Component) {
     }
 
     _createClass(Post, [{
-        key: "componentDidMount",
+        key: 'componentDidMount',
         value: function componentDidMount() {
-            fetch("http://localhost/celestial/wp-json/wp/v2/posts?slug=hello-world").then(function (response) {
+
+            var url = window.location.href.split('/');
+            var slug = url.pop() || url.pop();
+
+            fetch(CelestialSettings.URL.api + "/posts?slug=" + slug).then(function (response) {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
                 return response.json();
             }).then(function (res) {
-                jQuery("#content").append("\n                    <div class=\"container post-entry\">\n                        <div class=\"card\">\n                            <div class=\"card-body\">\n                            <h4 class=\"card-title\">Card title</h4>\n                            <p class=\"card-text\"><small class=\"text-muted\">" + res[0].author_name + " &ndash; " + res[0].published_date + "</small></p>\n                            <p class=\"card-text\">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>\n                            </div>\n                        </div>\n                    </div>\n                ");
+                if (res == '') {
+                    jQuery("#content").append('\n                        <div class="container post-entry">\n                            <div class="card">\n                                <div class="card-body">\n                                <h4 class="card-title">404 Page Not Found</h4>\n                                <p class="card-text">Sorry, the page you are requesting is not found</p>\n                                </div>\n                            </div>\n                        </div>\n                    ');
+                }
+                jQuery("#content").append('\n                    <div class="container post-entry">\n                        <div class="card">\n                            <div class="card-body">\n                            <h4 class="card-title">' + res[0].title.rendered + '</h4>\n                            <p class="card-text"><small class="text-muted">' + res[0].author_name + ' &ndash; ' + res[0].published_date + '</small></p>\n                            <p class="card-text">' + res[0].content.rendered + '</p>\n                            </div>\n                        </div>\n                    </div>\n                ');
             });
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
-            var parts = window.location.href.split('/');
-            var lastSegment = parts.pop() || parts.pop(); // handle potential trailing slash
-
-            return _react2.default.createElement("div", { id: "content" });
+            return _react2.default.createElement('div', { id: 'content' });
         }
     }]);
 

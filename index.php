@@ -19,7 +19,7 @@ get_header(); ?>
 <div id="content">
     <div id="app">
         <div class="loader-gif">
-            <img src="<?php get_template_directory() ?>wp-content/themes/celestial/dist/images/loader.gif" alt="Loader">
+            <img src="<?php echo home_url() ?>/wp-content/themes/celestial/dist/images/loading-icon.gif" alt="Loader">
         </div>
     </div>
 </div>
