@@ -25651,6 +25651,12 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(52);
+
+var _list = __webpack_require__(82);
+
+var _list2 = _interopRequireDefault(_list);
+
 var _loadingIcon = __webpack_require__(34);
 
 var _loadingIcon2 = _interopRequireDefault(_loadingIcon);
@@ -25677,7 +25683,7 @@ var Posts = function (_React$Component) {
 
         _this.getMorePosts = _this.getMorePosts.bind(_this);
         _this.state = {
-            posts: {},
+            posts: [],
             page: 0,
             getPosts: true
         };
@@ -25747,37 +25753,18 @@ var Posts = function (_React$Component) {
                 }
                 return response.json();
             }).then(function (results) {
-                jQuery.each(results, function (i, post) {
-                    jQuery(".card-group").append('<div class="col-sm-4">\n                                        <div class="card">\n                                            <img class="card-img-top" src=' + (post.featured_image_src ? post.featured_image_src : _placeholder2.default) + ' alt="Featured Image" />\n                                            <div class="card-body">\n                                                <h4 class="card-title"><a href="' + post.link + '">' + post.title.rendered + '</a></h4>\n                                                <p class="card-text"><small class="text-muted">' + post.author_name + ' &ndash; ' + post.published_date + '</small></p>\n                                                <p class="card-text">' + post.excerpt.rendered + '</p>\n                                            </div>\n                                        </div>\n                                    </div>');
-                    // });
-
-
-                    if (results[0] == null) {
-                        jQuery("#loader").remove();
-                    }
-                    // removing loader
-                    jQuery("#loader").removeClass("active");
-
-                    var controller2 = new ScrollMagic.Controller();
-                    // loop through each .posts-container .post-excerpt element
-                    jQuery('.card-group .col-sm-4').each(function () {
-
-                        // build a scene
-                        var ourScene2 = new ScrollMagic.Scene({
-                            triggerElement: this.children[0],
-                            reverse: false,
-                            triggerHook: 1
-                        }).setClassToggle(this, 'fade-in').addTo(controller2);
-                    });
-                });
+                that.setState({ posts: results });
             }).catch(function (error) {
-                console.log('There has been a problem with your fetch operation: ' + error.message);
+                console.err('There has been a problem with your fetch operation: ' + error.message);
                 jQuery("#loader").remove();
             });
         }
     }, {
         key: 'render',
         value: function render() {
+            if (this.state.posts.length == 0) {
+                return null;
+            }
             return _react2.default.createElement(
                 'div',
                 { id: 'content' },
@@ -25789,13 +25776,7 @@ var Posts = function (_React$Component) {
                         { className: 'posts-title' },
                         'Posts'
                     ),
-                    _react2.default.createElement('div', { className: 'card-group' }),
-                    _react2.default.createElement('div', { id: 'posts-here' }),
-                    _react2.default.createElement(
-                        'div',
-                        { id: 'loader' },
-                        _react2.default.createElement('img', { src: _loadingIcon2.default })
-                    )
+                    _react2.default.createElement(_list2.default, { posts: this.state.posts })
                 )
             );
         }
@@ -25854,15 +25835,15 @@ var Post = function (_React$Component) {
                 return response.json();
             }).then(function (res) {
                 if (res == '') {
-                    jQuery("#content").append('\n                        <div class="container post-entry">\n                            <div class="card">\n                                <div class="card-body">\n                                <h4 class="card-title">404 Page Not Found</h4>\n                                <p class="card-text">Sorry, the page you are requesting is not found</p>\n                                </div>\n                            </div>\n                        </div>\n                    ');
+                    jQuery("#content").append('\n                    <div class="container post-entry">\n                        <div class="card">\n                            <div class="card-body">\n                            <h4 class="card-title">404 Page Not Found</h4>\n                            <p class="card-text">Sorry, the page you are requesting is not found</p>\n                            </div>\n                        </div>\n                    </div>\n                ');
                 }
-                jQuery("#content").append('\n                    <div class="container post-entry">\n                        <div class="card">\n                            <div class="card-body">\n                            <h4 class="card-title">' + res[0].title.rendered + '</h4>\n                            <p class="card-text"><small class="text-muted">' + res[0].author_name + ' &ndash; ' + res[0].published_date + '</small></p>\n                            <p class="card-text">' + res[0].content.rendered + '</p>\n                            </div>\n                        </div>\n                    </div>\n                ');
+                jQuery("#content").append('\n                <div class="container post-entry">\n                    <div class="card">\n                        <div class="card-body">\n                        <h4 class="card-title">' + res[0].title.rendered + '</h4>\n                        <p class="card-text"><small class="text-muted">' + res[0].author_name + ' &ndash; ' + res[0].published_date + '</small></p>\n                        <p class="card-text">' + res[0].content.rendered + '</p>\n                        </div>\n                    </div>\n                </div>\n            ');
             });
         }
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { id: 'content' });
+            return _react2.default.createElement('div', { id: 'post-outer' });
         }
     }]);
 
@@ -25876,6 +25857,120 @@ exports.default = Post;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(52);
+
+var _placeholder = __webpack_require__(35);
+
+var _placeholder2 = _interopRequireDefault(_placeholder);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // External dependencies
+
+
+var PostList = function (_React$Component) {
+    _inherits(PostList, _React$Component);
+
+    function PostList() {
+        _classCallCheck(this, PostList);
+
+        return _possibleConstructorReturn(this, (PostList.__proto__ || Object.getPrototypeOf(PostList)).apply(this, arguments));
+    }
+
+    _createClass(PostList, [{
+        key: 'renderPosts',
+        value: function renderPosts() {
+            return this.props.posts.map(function (post, i) {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'col-sm-4 card-outer', key: i },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'card' },
+                        _react2.default.createElement('img', { className: 'card-img-top', src: post.featured_image_src ? post.featured_image_src : _placeholder2.default, alt: 'Featured Image' }),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'card-body' },
+                            _react2.default.createElement(
+                                'h4',
+                                { className: 'card-title' },
+                                _react2.default.createElement(
+                                    _reactRouterDom.Link,
+                                    { to: post.slug },
+                                    post.title.rendered
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                { className: 'card-text' },
+                                _react2.default.createElement(
+                                    'small',
+                                    { className: 'text-muted' },
+                                    post.author_name,
+                                    ' \u2013 ',
+                                    post.published_date
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                jQuery(post.excerpt.rendered).text()
+                            )
+                        )
+                    )
+                );
+            });
+        }
+    }, {
+        key: 'renderEmpty',
+        value: function renderEmpty() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                'EMPTY'
+            );
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            if (!this.props.posts) {
+                return null;
+            }
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                this.props.posts.length ? this.renderPosts() : this.renderEmpty()
+            );
+        }
+    }]);
+
+    return PostList;
+}(_react2.default.Component);
+
+exports.default = PostList;
 
 /***/ })
 /******/ ]);

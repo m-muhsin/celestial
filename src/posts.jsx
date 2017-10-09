@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import PostList from './list';
 import LoadingIcon from './loading-icon.gif';
 import Placeholder from './placeholder.jpg';
 
@@ -8,7 +10,7 @@ class Posts extends React.Component {
         super(props);
         this.getMorePosts = this.getMorePosts.bind(this);
         this.state = {
-            posts: {},
+            posts: [],
             page: 0,
             getPosts: true
         }
@@ -54,57 +56,22 @@ class Posts extends React.Component {
                 return response.json();
             })
             .then(function (results) {
-                jQuery.each(results, function (i, post) {
-                    jQuery(".card-group")
-                        .append(
-                        `<div class="col-sm-4">
-                                        <div class="card">
-                                            <img class="card-img-top" src=${post.featured_image_src ? post.featured_image_src : Placeholder} alt="Featured Image" />
-                                            <div class="card-body">
-                                                <h4 class="card-title"><a href="${post.link}">${post.title.rendered}</a></h4>
-                                                <p class="card-text"><small class="text-muted">${post.author_name} &ndash; ${post.published_date}</small></p>
-                                                <p class="card-text">${post.excerpt.rendered}</p>
-                                            </div>
-                                        </div>
-                                    </div>`
-                        );
-                    // });
-
-
-                    if (results[0] == null) {
-                        jQuery("#loader").remove();
-                    }
-                    // removing loader
-                    jQuery("#loader").removeClass("active");
-
-                    var controller2 = new ScrollMagic.Controller();
-                    // loop through each .posts-container .post-excerpt element
-                    jQuery('.card-group .col-sm-4').each(function () {
-
-                        // build a scene
-                        var ourScene2 = new ScrollMagic.Scene({
-                            triggerElement: this.children[0],
-                            reverse: false,
-                            triggerHook: 1
-                        })
-                            .setClassToggle(this, 'fade-in')
-                            .addTo(controller2);
-                    });
-                });
+                that.setState({ posts: results })
             }).catch(function (error) {
-                console.log('There has been a problem with your fetch operation: ' + error.message);
+                console.err('There has been a problem with your fetch operation: ' + error.message);
                 jQuery("#loader").remove();
             });
     }
 
     render() {
+        if (this.state.posts.length == 0) {
+            return null;
+        }
         return (
             <div id="content">
                 <div className="container">
                     <h1 className="posts-title">Posts</h1>
-                    <div className="card-group"></div>
-                    <div id="posts-here"></div>
-                    <div id="loader"><img src={LoadingIcon} /></div>
+                        <PostList posts={this.state.posts} />
                 </div>
             </div>
         );
