@@ -25835,15 +25835,81 @@ var Post = function (_React$Component) {
                 return response.json();
             }).then(function (res) {
                 if (res == '') {
-                    jQuery("#content").append('\n                    <div class="container post-entry">\n                        <div class="card">\n                            <div class="card-body">\n                            <h4 class="card-title">404 Page Not Found</h4>\n                            <p class="card-text">Sorry, the page you are requesting is not found</p>\n                            </div>\n                        </div>\n                    </div>\n                ');
+                    jQuery("#post-outer").append('\n                    <div class="container post-entry">\n                        <div class="card">\n                            <div class="card-body">\n                            <h4 class="card-title">404 Page Not Found</h4>\n                            <p class="card-text">Sorry, the page you are requesting is not found</p>\n                            </div>\n                        </div>\n                    </div>\n                ');
                 }
-                jQuery("#content").append('\n                <div class="container post-entry">\n                    <div class="card">\n                        <div class="card-body">\n                        <h4 class="card-title">' + res[0].title.rendered + '</h4>\n                        <p class="card-text"><small class="text-muted">' + res[0].author_name + ' &ndash; ' + res[0].published_date + '</small></p>\n                        <p class="card-text">' + res[0].content.rendered + '</p>\n                        </div>\n                    </div>\n                </div>\n            ');
+                jQuery("#post-outer").append('\n                <div class="container post-entry">\n                    <div class="card">\n                        <div class="card-body">\n                        <h4 class="card-title">' + res[0].title.rendered + '</h4>\n                        <p class="card-text"><small class="text-muted">' + res[0].author_name + ' &ndash; ' + res[0].published_date + '</small></p>\n                        <p class="card-text">' + res[0].content.rendered + '</p>\n                        </div>\n                    </div>\n                </div>\n            ');
             });
         }
     }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement('div', { id: 'post-outer' });
+        }
+    }, {
+        key: 'renderPosts',
+        value: function renderPosts() {
+            return this.props.posts.map(function (post, i) {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'col-sm-4 card-outer', key: i },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'card' },
+                        _react2.default.createElement('img', { className: 'card-img-top', src: post.featured_image_src ? post.featured_image_src : Placeholder, alt: 'Featured Image' }),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'card-body' },
+                            _react2.default.createElement(
+                                'h4',
+                                { className: 'card-title' },
+                                _react2.default.createElement(
+                                    Link,
+                                    { to: post.slug },
+                                    post.title.rendered
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                { className: 'card-text' },
+                                _react2.default.createElement(
+                                    'small',
+                                    { className: 'text-muted' },
+                                    post.author_name,
+                                    ' \u2013 ',
+                                    post.published_date
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                jQuery(post.excerpt.rendered).text()
+                            )
+                        )
+                    )
+                );
+            });
+        }
+    }, {
+        key: 'renderEmpty',
+        value: function renderEmpty() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                'EMPTY'
+            );
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            if (!this.props.posts) {
+                return null;
+            }
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                this.props.posts.length ? this.renderPosts() : this.renderEmpty()
+            );
         }
     }]);
 
