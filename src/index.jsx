@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import Header from './header';
+import Footer from './footer';
 import Posts from './posts';
 import Post from './post';
 import LoadingIcon from './loading-icon.gif';
@@ -11,10 +13,15 @@ import Placeholder from './placeholder.jpg';
 require('./style.scss');
 
 const App = () => (
-    <Switch>
-        <Route exact path={CelestialSettings.path} component={Posts} />
-        <Route path={CelestialSettings.path + '*'} component={Post} />
-    </Switch>
+    <div id="page-inner">
+        <Header />
+        <Switch>
+            <Route exact path={CelestialSettings.path} component={Posts} />
+            <Route path={CelestialSettings.path + '*'} component={Post} />
+        </Switch>
+        <Footer />
+    </div>
+
 );
 
 // Routes
@@ -25,5 +32,5 @@ const routes = (
 );
 
 render(
-    (routes), document.getElementById('app')
+    (routes), document.getElementById('page')
 );

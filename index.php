@@ -17,10 +17,8 @@
 get_header(); ?>
 
 <div id="content">
-    <div id="app">
-        <div class="loader-gif">
-            <img src="<?php echo home_url() ?>/wp-content/themes/celestial/dist/images/loading-icon.gif" alt="Loader">
-        </div>
+    <div class="loader-gif">
+        <img src="<?php echo home_url() ?>/wp-content/themes/celestial/dist/images/loading-icon.gif" alt="Loader">
     </div>
 </div>
 

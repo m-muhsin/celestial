@@ -4,7 +4,7 @@
     }
 }
 
-body, div#page {  /* Will not work on IE if body is ommitted */
+body, div#page-inner {  /* Will not work on IE if body is ommitted */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -92,5 +92,5 @@ footer#colophon {
 
 .col-sm-4.card-outer {
     float: left;
-    padding-top: 1em;
+    padding-bottom: 1em;
 }
