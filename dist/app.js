@@ -26238,7 +26238,11 @@ var Products = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'card' },
-                        _react2.default.createElement('img', { className: 'card-img-top', src: product.images ? product.images[0].src : Placeholder, alt: 'Featured Image' }),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'img-outer' },
+                            _react2.default.createElement('img', { className: 'card-img-top', src: product.images ? product.images[0].src : Placeholder, alt: 'Featured Image' })
+                        ),
                         _react2.default.createElement(
                             'div',
                             { className: 'card-body' },
@@ -26246,8 +26250,8 @@ var Products = function (_React$Component) {
                                 'h4',
                                 { className: 'card-title' },
                                 _react2.default.createElement(
-                                    _reactRouterDom.Link,
-                                    { to: product.slug },
+                                    'a',
+                                    { href: '#' },
                                     product.name
                                 )
                             ),

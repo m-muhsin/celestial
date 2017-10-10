@@ -87,11 +87,11 @@ function celestial_register_fields() {
 		)
 	);
 }
+add_action( 'rest_api_init', 'celestial_register_fields' );
 
 function celestial_get_author_name( $object, $field_name, $request ) {
 	return get_the_author_meta( 'display_name' );
 }
-
 function celestial_get_image_src( $object, $field_name, $request ) {
     if($object[ 'featured_media' ] == 0) {
         return $object[ 'featured_media' ];
@@ -99,18 +99,17 @@ function celestial_get_image_src( $object, $field_name, $request ) {
 	$feat_img_array = wp_get_attachment_image_src( $object[ 'featured_media' ], 'thumbnail', true );
     return $feat_img_array[0];
 }
-
 function celestial_published_date( $object, $field_name, $request ) {
 	return get_the_time('F j, Y');
 }
-
-
 function celestial_rendered_title( $object, $field_name, $request ) {
 	return get_the_title();
 }
-
 function celestial_rendered_content( $object, $field_name, $request ) {
 	return get_the_content();
 }
 
-add_action( 'rest_api_init', 'celestial_register_fields' );
+function celestial_excerpt_length( $length ) {
+    return 20;
+}
+add_filter( 'excerpt_length', 'celestial_excerpt_length' );
