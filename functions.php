@@ -62,7 +62,25 @@ function celestial_register_fields() {
             'update_callback'	=> null,
             'schema'			=> null
         )
-    );
+	);
+	// Add Rendered Title
+	register_rest_field( 'post',
+		'rendered_title',
+		array(
+			'get_callback'		=> 'celestial_rendered_title',
+			'update_callback'	=> null,
+			'schema'			=> null
+		)
+	);
+	// Add Rendered Title
+	register_rest_field( 'post',
+		'rendered_content',
+		array(
+			'get_callback'		=> 'celestial_rendered_content',
+			'update_callback'	=> null,
+			'schema'			=> null
+		)
+	);
 }
 
 function celestial_get_author_name( $object, $field_name, $request ) {
@@ -79,6 +97,15 @@ function celestial_get_image_src( $object, $field_name, $request ) {
 
 function celestial_published_date( $object, $field_name, $request ) {
 	return get_the_time('F j, Y');
+}
+
+
+function celestial_rendered_title( $object, $field_name, $request ) {
+	return get_the_title();
+}
+
+function celestial_rendered_content( $object, $field_name, $request ) {
+	return get_the_content();
 }
 
 add_action( 'rest_api_init', 'celestial_register_fields' );

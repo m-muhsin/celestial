@@ -25667,9 +25667,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(16);
 
-var _list = __webpack_require__(80);
+var _postList = __webpack_require__(85);
 
-var _list2 = _interopRequireDefault(_list);
+var _postList2 = _interopRequireDefault(_postList);
 
 var _loadingIcon = __webpack_require__(36);
 
@@ -25790,7 +25790,7 @@ var Posts = function (_React$Component) {
                         { className: 'posts-title' },
                         'Posts'
                     ),
-                    _react2.default.createElement(_list2.default, { posts: this.state.posts })
+                    _react2.default.createElement(_postList2.default, { posts: this.state.posts })
                 )
             );
         }
@@ -25802,120 +25802,7 @@ var Posts = function (_React$Component) {
 exports.default = Posts;
 
 /***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(16);
-
-var _placeholder = __webpack_require__(23);
-
-var _placeholder2 = _interopRequireDefault(_placeholder);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // External dependencies
-
-
-var PostList = function (_React$Component) {
-    _inherits(PostList, _React$Component);
-
-    function PostList() {
-        _classCallCheck(this, PostList);
-
-        return _possibleConstructorReturn(this, (PostList.__proto__ || Object.getPrototypeOf(PostList)).apply(this, arguments));
-    }
-
-    _createClass(PostList, [{
-        key: 'renderPosts',
-        value: function renderPosts() {
-            return this.props.posts.map(function (post, i) {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'col-sm-4 card-outer', key: i },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'card' },
-                        _react2.default.createElement('img', { className: 'card-img-top', src: post.featured_image_src ? post.featured_image_src : _placeholder2.default, alt: 'Featured Image' }),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'card-body' },
-                            _react2.default.createElement(
-                                'h4',
-                                { className: 'card-title' },
-                                _react2.default.createElement(
-                                    _reactRouterDom.Link,
-                                    { to: post.slug },
-                                    post.title.rendered
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'card-text' },
-                                _react2.default.createElement(
-                                    'small',
-                                    { className: 'text-muted' },
-                                    post.author_name,
-                                    ' \u2013 ',
-                                    post.published_date
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                null,
-                                jQuery(post.excerpt.rendered).text()
-                            )
-                        )
-                    )
-                );
-            });
-        }
-    }, {
-        key: 'renderEmpty',
-        value: function renderEmpty() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                'EMPTY'
-            );
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            if (!this.props.posts) {
-                return null;
-            }
-
-            return _react2.default.createElement(
-                'div',
-                null,
-                this.props.posts.length ? this.renderPosts() : this.renderEmpty()
-            );
-        }
-    }]);
-
-    return PostList;
-}(_react2.default.Component);
-
-exports.default = PostList;
-
-/***/ }),
+/* 80 */,
 /* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25943,16 +25830,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Post = function (_React$Component) {
     _inherits(Post, _React$Component);
 
-    function Post() {
+    function Post(props) {
         _classCallCheck(this, Post);
 
-        return _possibleConstructorReturn(this, (Post.__proto__ || Object.getPrototypeOf(Post)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this, props));
+
+        _this.state = {
+            post: {}
+        };
+        return _this;
     }
 
     _createClass(Post, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-
+            var that = this;
             var url = window.location.href.split('/');
             var slug = url.pop() || url.pop();
 
@@ -25962,16 +25854,86 @@ var Post = function (_React$Component) {
                 }
                 return response.json();
             }).then(function (res) {
-                if (res == '') {
-                    jQuery("#post-outer").append('\n                    <div class="container post-entry">\n                        <div class="card">\n                            <div class="card-body">\n                            <h4 class="card-title">404 Page Not Found</h4>\n                            <p class="card-text">Sorry, the page you are requesting is not found</p>\n                            </div>\n                        </div>\n                    </div>\n                ');
-                }
-                jQuery("#post-outer").append('\n                <div class="container post-entry">\n                    <div class="card">\n                        <div class="card-body">\n                        <h4 class="card-title">' + res[0].title.rendered + '</h4>\n                        <p class="card-text"><small class="text-muted">' + res[0].author_name + ' &ndash; ' + res[0].published_date + '</small></p>\n                        <p class="card-text">' + res[0].content.rendered + '</p>\n                        </div>\n                    </div>\n                </div>\n            ');
+                that.setState({ post: res[0] });
+                // if ( res == '') {
+                //     jQuery("#post-outer").append(`
+                //         <div class="container post-entry">
+                //             <div class="card">
+                //                 <div class="card-body">
+                //                 <h4 class="card-title">404 Page Not Found</h4>
+                //                 <p class="card-text">Sorry, the page you are requesting is not found</p>
+                //                 </div>
+                //             </div>
+                //         </div>
+                //     `);
+                // }
+                // jQuery("#post-outer").append(`
+                // <div class="container post-entry">
+                //     <div class="card">
+                //         <div class="card-body">
+                //         <h4 class="card-title">${res[0].title.rendered}</h4>
+                //         <p class="card-text"><small class="text-muted">${res[0].author_name} &ndash; ${res[0].published_date}</small></p>
+                //         <p class="card-text">${res[0].content.rendered}</p>
+                //         </div>
+                //     </div>
+                // </div>
+                // `);
             });
+        }
+    }, {
+        key: 'renderPosts',
+        value: function renderPosts() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'container post-entry' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'card' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'card-body' },
+                        _react2.default.createElement(
+                            'h4',
+                            { className: 'card-title' },
+                            this.state.post.rendered_title
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'card-text' },
+                            _react2.default.createElement(
+                                'small',
+                                { className: 'text-muted' },
+                                this.state.post.author_name,
+                                ' \u2013 ',
+                                this.state.post.published_date
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'card-text' },
+                            this.state.post.rendered_content
+                        )
+                    )
+                )
+            );
+        }
+    }, {
+        key: 'renderEmpty',
+        value: function renderEmpty() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                'EMPTY'
+            );
         }
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { id: 'post-outer' });
+            return _react2.default.createElement(
+                'div',
+                { id: 'content' },
+                this.state.post ? this.renderPosts() : this.renderEmpty()
+            );
         }
     }]);
 
@@ -26117,6 +26079,120 @@ function Footer() {
 }
 
 exports.default = Footer;
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(16);
+
+var _placeholder = __webpack_require__(23);
+
+var _placeholder2 = _interopRequireDefault(_placeholder);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // External dependencies
+
+
+var PostList = function (_React$Component) {
+    _inherits(PostList, _React$Component);
+
+    function PostList() {
+        _classCallCheck(this, PostList);
+
+        return _possibleConstructorReturn(this, (PostList.__proto__ || Object.getPrototypeOf(PostList)).apply(this, arguments));
+    }
+
+    _createClass(PostList, [{
+        key: 'renderPosts',
+        value: function renderPosts() {
+            return this.props.posts.map(function (post, i) {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'col-sm-4 card-outer', key: i },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'card' },
+                        _react2.default.createElement('img', { className: 'card-img-top', src: post.featured_image_src ? post.featured_image_src : _placeholder2.default, alt: 'Featured Image' }),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'card-body' },
+                            _react2.default.createElement(
+                                'h4',
+                                { className: 'card-title' },
+                                _react2.default.createElement(
+                                    _reactRouterDom.Link,
+                                    { to: post.slug },
+                                    post.title.rendered
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                { className: 'card-text' },
+                                _react2.default.createElement(
+                                    'small',
+                                    { className: 'text-muted' },
+                                    post.author_name,
+                                    ' \u2013 ',
+                                    post.published_date
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                jQuery(post.excerpt.rendered).text()
+                            )
+                        )
+                    )
+                );
+            });
+        }
+    }, {
+        key: 'renderEmpty',
+        value: function renderEmpty() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                'EMPTY'
+            );
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            if (!this.props.posts) {
+                return null;
+            }
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                this.props.posts.length ? this.renderPosts() : this.renderEmpty()
+            );
+        }
+    }]);
+
+    return PostList;
+}(_react2.default.Component);
+
+exports.default = PostList;
 
 /***/ })
 /******/ ]);
