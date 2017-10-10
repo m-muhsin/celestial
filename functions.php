@@ -30,6 +30,11 @@ function celestial_scripts() {
 			'root' => esc_url_raw( $url ),
 			'frontPage' => get_option( 'page_on_front' ),
 		),
+		'woo' => array(
+			'url' => esc_url_raw( 'https://localhost/celestial/wp-json/wc/v2/' ),
+			'consumer_key' => 'ck_803bcdcaa73d3a406a0f107041b07ef6217e05b9',
+			'consumer_secret' => 'cs_c50ba3a77cc88c3bf46ebac49bbc96de3a543f03'
+		),
 	) ) ) );
 }
 add_action( 'wp_enqueue_scripts', 'celestial_scripts' );

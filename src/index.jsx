@@ -6,6 +6,7 @@ import Header from './header';
 import Footer from './footer';
 import Posts from './posts';
 import Post from './post';
+import Products from './products';
 import LoadingIcon from './loading-icon.gif';
 import Placeholder from './placeholder.jpg';
 
@@ -17,6 +18,7 @@ const App = () => (
         <Header />
         <Switch>
             <Route exact path={CelestialSettings.path} component={Posts} />
+            <Route path={CelestialSettings.path + 'products'} component={Products} />
             <Route path={CelestialSettings.path + '*'} component={Post} />
         </Switch>
         <Footer />

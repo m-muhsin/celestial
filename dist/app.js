@@ -2416,6 +2416,10 @@ var _post = __webpack_require__(81);
 
 var _post2 = _interopRequireDefault(_post);
 
+var _products = __webpack_require__(86);
+
+var _products2 = _interopRequireDefault(_products);
+
 var _loadingIcon = __webpack_require__(36);
 
 var _loadingIcon2 = _interopRequireDefault(_loadingIcon);
@@ -2438,6 +2442,7 @@ var App = function App() {
             _reactRouterDom.Switch,
             null,
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: CelestialSettings.path, component: _posts2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: CelestialSettings.path + 'products', component: _products2.default }),
             _react2.default.createElement(_reactRouterDom.Route, { path: CelestialSettings.path + '*', component: _post2.default })
         ),
         _react2.default.createElement(_footer2.default, null)
@@ -25855,29 +25860,6 @@ var Post = function (_React$Component) {
                 return response.json();
             }).then(function (res) {
                 that.setState({ post: res[0] });
-                // if ( res == '') {
-                //     jQuery("#post-outer").append(`
-                //         <div class="container post-entry">
-                //             <div class="card">
-                //                 <div class="card-body">
-                //                 <h4 class="card-title">404 Page Not Found</h4>
-                //                 <p class="card-text">Sorry, the page you are requesting is not found</p>
-                //                 </div>
-                //             </div>
-                //         </div>
-                //     `);
-                // }
-                // jQuery("#post-outer").append(`
-                // <div class="container post-entry">
-                //     <div class="card">
-                //         <div class="card-body">
-                //         <h4 class="card-title">${res[0].title.rendered}</h4>
-                //         <p class="card-text"><small class="text-muted">${res[0].author_name} &ndash; ${res[0].published_date}</small></p>
-                //         <p class="card-text">${res[0].content.rendered}</p>
-                //         </div>
-                //     </div>
-                // </div>
-                // `);
             });
         }
     }, {
@@ -26027,14 +26009,9 @@ var Header = function (_React$Component) {
                                     )
                                 ),
                                 _react2.default.createElement(
-                                    'a',
-                                    { className: 'nav-item nav-link', href: '#' },
-                                    'About'
-                                ),
-                                _react2.default.createElement(
-                                    'a',
-                                    { className: 'nav-item nav-link', href: '#' },
-                                    'Contact'
+                                    _reactRouterDom.Link,
+                                    { className: 'nav-item nav-link', to: CelestialSettings.path + "products/" },
+                                    'Products'
                                 )
                             )
                         )
@@ -26193,6 +26170,135 @@ var PostList = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = PostList;
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(16);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Products = function (_React$Component) {
+    _inherits(Products, _React$Component);
+
+    function Products(props) {
+        _classCallCheck(this, Products);
+
+        var _this = _possibleConstructorReturn(this, (Products.__proto__ || Object.getPrototypeOf(Products)).call(this, props));
+
+        _this.state = {
+            products: []
+        };
+        return _this;
+    }
+
+    _createClass(Products, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var that = this;
+            var url = window.location.href.split('/');
+            var slug = url.pop() || url.pop();
+
+            fetch(CelestialSettings.woo.url + "products?consumer_key=" + CelestialSettings.woo.consumer_key + "&consumer_secret=" + CelestialSettings.woo.consumer_secret).then(function (response) {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response.json();
+            }).then(function (res) {
+                that.setState({ products: res });
+            });
+        }
+    }, {
+        key: 'renderProducts',
+        value: function renderProducts() {
+            return this.state.products.map(function (product, i) {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'col-sm-4 card-outer', key: i },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'card' },
+                        _react2.default.createElement('img', { className: 'card-img-top', src: product.images ? product.images[0].src : Placeholder, alt: 'Featured Image' }),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'card-body' },
+                            _react2.default.createElement(
+                                'h4',
+                                { className: 'card-title' },
+                                _react2.default.createElement(
+                                    _reactRouterDom.Link,
+                                    { to: product.slug },
+                                    product.name
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                { className: 'card-text' },
+                                _react2.default.createElement(
+                                    'small',
+                                    { className: 'text-muted' },
+                                    '$ ',
+                                    product.price
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                jQuery(product.description).text()
+                            )
+                        )
+                    )
+                );
+            });
+        }
+    }, {
+        key: 'renderEmpty',
+        value: function renderEmpty() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                'EMPTY'
+            );
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { id: 'content' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'container' },
+                    this.state.products ? this.renderProducts() : this.renderEmpty()
+                )
+            );
+        }
+    }]);
+
+    return Products;
+}(_react2.default.Component);
+
+exports.default = Products;
 
 /***/ })
 /******/ ]);

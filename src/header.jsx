@@ -14,8 +14,7 @@ class Header extends React.Component {
                         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
                                 <Link className="nav-item nav-link active"  to={CelestialSettings.path} >Home <span className="sr-only">(current)</span></Link>
-                                <a className="nav-item nav-link" href="#">About</a>
-                                <a className="nav-item nav-link" href="#">Contact</a>
+                                <Link className="nav-item nav-link" to={CelestialSettings.path + "products/"} >Products</Link>
                             </div>
                         </div>
                     </nav >

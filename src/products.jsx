@@ -1,0 +1,68 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+class Products extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: []
+        }
+    }
+
+    componentDidMount() {
+        var that = this;
+        var url = window.location.href.split('/');
+        var slug = url.pop() || url.pop();
+
+        fetch(CelestialSettings.woo.url + "products?consumer_key="+CelestialSettings.woo.consumer_key+"&consumer_secret=" + CelestialSettings.woo.consumer_secret )
+            .then(function (response) {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(function (res) {
+                that.setState({ products: res })
+            });
+    }
+
+    renderProducts() {
+        return this.state.products.map((product, i) => {
+            return (
+                <div className="col-sm-4 card-outer" key={i}>
+                    <div className="card">
+                        <img className="card-img-top" src={product.images ? product.images[0].src : Placeholder} alt="Featured Image" />
+                        <div className="card-body">
+                            <h4 className="card-title"><Link to={product.slug}>{product.name}</Link></h4>
+                            <p className="card-text"><small className="text-muted">$ {product.price}</small></p>
+                            <p>{jQuery(product.description).text()}</p>
+                        </div>
+                    </div>
+                </div>
+            )
+        });
+    }
+
+    renderEmpty() {
+        return (
+            <div>EMPTY</div>
+        )
+    }
+
+    render() {
+        return (
+            <div id="content">
+                <div className="container">
+                    {this.state.products ?
+                        this.renderProducts() :
+                        this.renderEmpty()
+                    }
+                </div>
+            </div>
+        );
+    }
+
+}
+
+export default Products;
