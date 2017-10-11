@@ -49,6 +49,10 @@ footer#colophon {
   padding: 10px;
   margin-bottom: 20px; }
 
+img#loader {
+  clear: both;
+  margin: 0 auto; }
+
 #loader {
   text-align: center;
   display: none; }

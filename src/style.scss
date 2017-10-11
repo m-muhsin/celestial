@@ -58,6 +58,11 @@ footer#colophon {
     padding: 10px;
     margin-bottom: 20px;
 }
+
+img#loader {
+    clear: both;
+    margin: 0 auto;
+}
 #loader {
     text-align: center;
     display: none;
@@ -65,7 +70,6 @@ footer#colophon {
 #loader.active {
     display: block;
 }
-
 .loader-gif {
     text-align: center;
     margin-top: 10em;
