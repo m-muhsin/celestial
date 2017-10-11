@@ -19,12 +19,12 @@ class Posts extends React.Component {
     componentDidMount() {
         var that = this;
         window.onbeforeunload = function () { window.scrollTo(0, 0); }
-
+ 
         // init controller
         var controller = new ScrollMagic.Controller();
 
         // build scene
-        var scene = new ScrollMagic.Scene({ triggerElement: "#posts-here", triggerHook: "onEnter" })
+        var scene = new ScrollMagic.Scene({ triggerElement: "#colophon", triggerHook: "onEnter" })
             .addTo(controller)
             .on("enter", function (e) {
                 if (that.state.getPosts) {
@@ -56,9 +56,13 @@ class Posts extends React.Component {
                 return response.json();
             })
             .then(function (results) {
-                that.setState({ posts: results })
+                var allPosts = that.state.posts.slice()
+                results.forEach(function(single) {
+                    allPosts.push(single)
+                })
+                that.setState({ posts: allPosts })
             }).catch(function (error) {
-                console.err('There has been a problem with your fetch operation: ' + error.message);
+                console.log('There has been a problem with your fetch operation: ' + error.message);
                 jQuery("#loader").remove();
             });
     }
@@ -71,7 +75,7 @@ class Posts extends React.Component {
             <div id="content">
                 <div className="container">
                     <h1 className="posts-title">Posts</h1>
-                        <PostList posts={this.state.posts} />
+                    <PostList posts={this.state.posts} />
                 </div>
             </div>
         );

@@ -25721,7 +25721,7 @@ var Posts = function (_React$Component) {
             var controller = new ScrollMagic.Controller();
 
             // build scene
-            var scene = new ScrollMagic.Scene({ triggerElement: "#posts-here", triggerHook: "onEnter" }).addTo(controller).on("enter", function (e) {
+            var scene = new ScrollMagic.Scene({ triggerElement: "#colophon", triggerHook: "onEnter" }).addTo(controller).on("enter", function (e) {
                 if (that.state.getPosts) {
                     that.getMorePosts();
                 }
@@ -25772,9 +25772,13 @@ var Posts = function (_React$Component) {
                 }
                 return response.json();
             }).then(function (results) {
-                that.setState({ posts: results });
+                var allPosts = that.state.posts.slice();
+                results.forEach(function (single) {
+                    allPosts.push(single);
+                });
+                that.setState({ posts: allPosts });
             }).catch(function (error) {
-                console.err('There has been a problem with your fetch operation: ' + error.message);
+                console.log('There has been a problem with your fetch operation: ' + error.message);
                 jQuery("#loader").remove();
             });
         }
