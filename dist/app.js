@@ -26164,7 +26164,7 @@ var PostList = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'posts-container' },
                 this.props.posts.length ? this.renderPosts() : this.renderEmpty()
             );
         }

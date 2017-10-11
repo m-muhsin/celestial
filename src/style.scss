@@ -66,21 +66,6 @@ footer#colophon {
     display: block;
 }
 
-.card-group .col-sm-4 {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.5s ease-out;
-}
-.card-group .col-sm-4.fade-in {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.card-group .col-sm-4 {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
 .loader-gif {
     text-align: center;
     margin-top: 10em;
@@ -103,4 +88,9 @@ footer#colophon {
 .img-outer {
     height: 250px;
     overflow: hidden;
+}
+
+#posts-here {
+    position: fixed;
+    bottom: 10px;
 }

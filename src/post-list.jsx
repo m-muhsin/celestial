@@ -34,7 +34,7 @@ class PostList extends React.Component {
         }
 
         return (
-            <div>
+            <div className="posts-container">
                 {this.props.posts.length ?
                     this.renderPosts() :
                     this.renderEmpty()
