@@ -25777,6 +25777,7 @@ var Posts = function (_React$Component) {
                     allPosts.push(single);
                 });
                 that.setState({ posts: allPosts });
+                jQuery("#loader").removeClass("active");
             }).catch(function (error) {
                 console.log('There has been a problem with your fetch operation: ' + error.message);
                 jQuery("#loader").remove();
@@ -25800,7 +25801,8 @@ var Posts = function (_React$Component) {
                         'Posts'
                     ),
                     _react2.default.createElement(_postList2.default, { posts: this.state.posts })
-                )
+                ),
+                _react2.default.createElement('img', { src: _loadingIcon2.default, alt: 'loader gif', id: 'loader' })
             );
         }
     }]);

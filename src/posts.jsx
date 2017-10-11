@@ -19,7 +19,7 @@ class Posts extends React.Component {
     componentDidMount() {
         var that = this;
         window.onbeforeunload = function () { window.scrollTo(0, 0); }
- 
+
         // init controller
         var controller = new ScrollMagic.Controller();
 
@@ -56,11 +56,13 @@ class Posts extends React.Component {
                 return response.json();
             })
             .then(function (results) {
-                var allPosts = that.state.posts.slice()
-                results.forEach(function(single) {
-                    allPosts.push(single)
+                var allPosts = that.state.posts.slice();
+                results.forEach(function (single) {
+                    allPosts.push(single);
                 })
-                that.setState({ posts: allPosts })
+                that.setState({ posts: allPosts });
+                jQuery("#loader").removeClass("active");
+
             }).catch(function (error) {
                 console.log('There has been a problem with your fetch operation: ' + error.message);
                 jQuery("#loader").remove();
@@ -77,6 +79,7 @@ class Posts extends React.Component {
                     <h1 className="posts-title">Posts</h1>
                     <PostList posts={this.state.posts} />
                 </div>
+                <img src={LoadingIcon} alt="loader gif" id="loader" />
             </div>
         );
     }
