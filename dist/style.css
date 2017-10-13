@@ -82,3 +82,12 @@ img#loader {
 #posts-here {
   position: fixed;
   bottom: 10px; }
+
+.card-outer {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 0.5s ease-out; }
+
+.card-outer.fade-in {
+  opacity: 1;
+  transform: translateY(0); }

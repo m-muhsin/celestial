@@ -46,8 +46,9 @@ class Posts extends React.Component {
                     if (pair[0] == 'x-wp-totalpages') {
                         totalPages = pair[1];
                     }
-                    if (that.state.page == totalPages) {
-                        that.state.getPosts = false;
+
+                    if (that.state.page >= totalPages) {
+                        that.setState({ getPosts: false })
                     }
                 }
                 if (!response.ok) {
@@ -69,6 +70,22 @@ class Posts extends React.Component {
             });
     }
 
+    componentDidUpdate() {
+        var controller2 = new ScrollMagic.Controller();
+        // loop through each .posts-container .post-excerpt element
+        jQuery('.posts-container .col-sm-4.card-outer').each(function () {
+
+            // build a scene
+            var ourScene2 = new ScrollMagic.Scene({
+                triggerElement: this.children[0],
+                reverse: false,
+                triggerHook: 1
+            })
+                .setClassToggle(this, 'fade-in') // add class to project01
+                .addTo(controller2);
+        });
+    }
+
     render() {
         if (this.state.posts.length == 0) {
             return null;
@@ -79,6 +96,7 @@ class Posts extends React.Component {
                     <h1 className="posts-title">Posts</h1>
                     <PostList posts={this.state.posts} />
                 </div>
+                <div id="below-posts"></div>
                 <img src={LoadingIcon} alt="loader gif" id="loader" />
             </div>
         );
