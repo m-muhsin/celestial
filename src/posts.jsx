@@ -72,7 +72,6 @@ class Posts extends React.Component {
 
     componentDidUpdate() {
         var controller2 = new ScrollMagic.Controller();
-        // loop through each .posts-container .post-excerpt element
         jQuery('.posts-container .col-sm-4.card-outer').each(function () {
 
             // build a scene
@@ -81,7 +80,7 @@ class Posts extends React.Component {
                 reverse: false,
                 triggerHook: 1
             })
-                .setClassToggle(this, 'fade-in') // add class to project01
+                .setClassToggle(this, 'fade-in')
                 .addTo(controller2);
         });
     }
