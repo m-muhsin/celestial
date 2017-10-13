@@ -26246,6 +26246,22 @@ var Products = function (_React$Component) {
             });
         }
     }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {
+            var controller2 = new ScrollMagic.Controller();
+            // loop through each .posts-container .post-excerpt element
+            jQuery('.container .col-sm-4.card-outer').each(function () {
+
+                // build a scene
+                var ourScene2 = new ScrollMagic.Scene({
+                    triggerElement: this.children[0],
+                    reverse: false,
+                    triggerHook: 1
+                }).setClassToggle(this, 'fade-in') // add class to project01
+                .addTo(controller2);
+            });
+        }
+    }, {
         key: 'renderProducts',
         value: function renderProducts() {
             return this.state.products.map(function (product, i) {

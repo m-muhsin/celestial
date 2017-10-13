@@ -15,7 +15,7 @@ class Products extends React.Component {
         var url = window.location.href.split('/');
         var slug = url.pop() || url.pop();
 
-        fetch(CelestialSettings.woo.url + "products?consumer_key="+CelestialSettings.woo.consumer_key+"&consumer_secret=" + CelestialSettings.woo.consumer_secret )
+        fetch(CelestialSettings.woo.url + "products?consumer_key=" + CelestialSettings.woo.consumer_key + "&consumer_secret=" + CelestialSettings.woo.consumer_secret)
             .then(function (response) {
                 if (!response.ok) {
                     throw Error(response.statusText);
@@ -25,6 +25,22 @@ class Products extends React.Component {
             .then(function (res) {
                 that.setState({ products: res })
             });
+    }
+
+    componentDidUpdate() {
+        var controller2 = new ScrollMagic.Controller();
+        // loop through each .posts-container .post-excerpt element
+        jQuery('.container .col-sm-4.card-outer').each(function () {
+
+            // build a scene
+            var ourScene2 = new ScrollMagic.Scene({
+                triggerElement: this.children[0],
+                reverse: false,
+                triggerHook: 1
+            })
+                .setClassToggle(this, 'fade-in') // add class to project01
+                .addTo(controller2);
+        });
     }
 
     renderProducts() {
