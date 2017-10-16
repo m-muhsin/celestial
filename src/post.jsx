@@ -1,5 +1,6 @@
 import React from 'react';
 import NotFound from './not-found';
+import Placeholder from './placeholder.jpg';
 
 class Post extends React.Component {
 
@@ -34,6 +35,7 @@ class Post extends React.Component {
                     <div className="card-body">
                         <h4 className="card-title">{this.state.post.rendered_title}</h4>
                         <p className="card-text"><small className="text-muted">{this.state.post.author_name} &ndash; {this.state.post.published_date}</small></p>
+                        <img className="featured-image" src={this.state.post.featured_image_src? this.state.post.featured_image_src : Placeholder} alt="featured image"/>
                         <p className="card-text">{this.state.post.rendered_content}</p>
                     </div>
                 </div>

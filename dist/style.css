@@ -95,5 +95,5 @@ img#loader {
 .card-body div {
   float: left; }
 
-img.product-image {
+img.product-image, img.featured-image {
   width: 100%; }

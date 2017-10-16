@@ -27,7 +27,7 @@ module.exports = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
-                    'file-loader?name=[name].[ext]&outputPath=images/&publicPath=wp-content/themes/celestial/dist/',
+                    'file-loader?name=[name].[ext]&outputPath=images/&publicPath=http://localhost/celestial/wp-content/themes/celestial/dist/',
                     'image-webpack-loader'
                 ]
             },
