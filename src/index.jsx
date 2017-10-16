@@ -7,6 +7,8 @@ import Footer from './footer';
 import Posts from './posts';
 import Post from './post';
 import Products from './products';
+import Product from './product';
+import NotFound from './not-found';
 import LoadingIcon from './loading-icon.gif';
 import Placeholder from './placeholder.jpg';
 
@@ -18,8 +20,10 @@ const App = () => (
         <Header />
         <Switch>
             <Route exact path={CelestialSettings.path} component={Posts} />
-            <Route path={CelestialSettings.path + 'products'} component={Products} />
-            <Route path={CelestialSettings.path + '*'} component={Post} />
+            <Route exact path={CelestialSettings.path + 'products'} component={Products} />
+            <Route exact path={CelestialSettings.path + 'products/:product'} component={Product} />
+            <Route exact path={CelestialSettings.path + 'posts/:slug'} component={Post} />
+            <Route exact path="*" component={NotFound} />
         </Switch>
         <Footer />
     </div>

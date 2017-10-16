@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Placeholder from './placeholder.jpg';
 
 class Products extends React.Component {
 
@@ -46,10 +47,12 @@ class Products extends React.Component {
                 <div className="col-sm-4 card-outer" key={i}>
                     <div className="card">
                         <div className="img-outer">
-                            <img className="card-img-top" src={product.images ? product.images[0].src : Placeholder} alt="Featured Image" />
+                            <Link to={product.slug}>
+                                <img className="card-img-top" src={product.images ? product.images[0].src : Placeholder} alt="Featured Image" />
+                            </Link>
                         </div>
                         <div className="card-body">
-                            <h4 className="card-title"><a href="#">{product.name}</a></h4>
+                            <h4 className="card-title"><Link to={product.slug}>{product.name}</Link></h4>
                             <p className="card-text"><small className="text-muted">$ {product.price}</small></p>
                             <p>{jQuery(product.description).text()}</p>
                         </div>
@@ -61,8 +64,18 @@ class Products extends React.Component {
 
     renderEmpty() {
         return (
-            <div>EMPTY</div>
-        )
+            <div id="content">
+                <div className="container post-entry">
+                    <div className="card">
+                        <div className="card-body">
+                            <h4 className="card-title">404 Page Not Found!</h4>
+                            <p className="card-text">The page you requested does not exist.</p>
+                            <p className="card-text"><Link to={CelestialSettings.path}>Return to homepage</Link></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     render() {

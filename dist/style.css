@@ -91,3 +91,9 @@ img#loader {
 .card-outer.fade-in {
   opacity: 1;
   transform: translateY(0); }
+
+.card-body div {
+  float: left; }
+
+img.product-image {
+  width: 100%; }
