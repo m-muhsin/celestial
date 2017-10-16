@@ -1,4 +1,5 @@
 import React from 'react';
+import NotFound from './not-found';
 
 class Post extends React.Component {
 
@@ -42,7 +43,7 @@ class Post extends React.Component {
 
     renderEmpty() {
         return (
-            <div>EMPTY</div>
+            <NotFound />
         )
     }
 

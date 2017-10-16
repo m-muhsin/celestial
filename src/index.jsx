@@ -23,7 +23,7 @@ const App = () => (
             <Route exact path={CelestialSettings.path + 'products'} component={Products} />
             <Route exact path={CelestialSettings.path + 'products/:product'} component={Product} />
             <Route exact path={CelestialSettings.path + 'posts/:slug'} component={Post} />
-            <Route exact path="*" component={NotFound} />
+            <Route path="*" component={NotFound} />
         </Switch>
         <Footer />
     </div>
