@@ -1,6 +1,5 @@
 import React from 'react';
 import NotFound from './not-found';
-import Placeholder from './placeholder.jpg';
 
 class Post extends React.Component {
 
@@ -17,15 +16,15 @@ class Post extends React.Component {
         var slug = url.pop() || url.pop();
 
         fetch(CelestialSettings.URL.api + "/posts?slug=" + slug)
-        .then(function (response) {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            }
-            return response.json();
-        })
-        .then(function (res) {
-            that.setState({ post: res[0] })
-        });
+            .then(function (response) {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(function (res) {
+                that.setState({ post: res[0] })
+            });
     }
 
     renderPosts() {
@@ -35,7 +34,9 @@ class Post extends React.Component {
                     <div className="card-body">
                         <h4 className="card-title">{this.state.post.rendered_title}</h4>
                         <p className="card-text"><small className="text-muted">{this.state.post.author_name} &ndash; {this.state.post.published_date}</small></p>
-                        <img className="featured-image" src={this.state.post.featured_image_src? this.state.post.featured_image_src : Placeholder} alt="featured image"/>
+                        {
+                            this.state.post.featured_image_src ? <img className="featured-image" src={this.state.post.featured_image_src} alt="featured image" /> : null
+                        }
                         <p className="card-text">{this.state.post.rendered_content}</p>
                     </div>
                 </div>

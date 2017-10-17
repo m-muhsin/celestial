@@ -76,7 +76,7 @@ img#loader {
   height: 520px; }
 
 .img-outer {
-  height: 250px;
+  max-height: 250px;
   overflow: hidden; }
 
 #posts-here {

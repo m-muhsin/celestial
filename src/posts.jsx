@@ -15,6 +15,11 @@ class Posts extends React.Component {
             getPosts: true,
             controller: false
         }
+        this.getMorePosts = this.getMorePosts.bind(this);
+    }
+
+    componentWillUnmount() {
+        this.getMorePosts = null;
     }
 
     componentDidMount() {
@@ -28,12 +33,12 @@ class Posts extends React.Component {
         var scene = new ScrollMagic.Scene({ triggerElement: "#colophon", triggerHook: "onEnter" })
             .addTo(that.state.controller)
             .on("enter", function (e) {
-                if (that.state.getPosts) {
+                if (that.state.getPosts && that.getMorePosts !== null) {
                     that.getMorePosts();
                 }
             });
     }
-    
+
     getMorePosts() {
         var that = this;
         var totalPages;

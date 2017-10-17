@@ -25844,10 +25844,16 @@ var Posts = function (_React$Component) {
             getPosts: true,
             controller: false
         };
+        _this.getMorePosts = _this.getMorePosts.bind(_this);
         return _this;
     }
 
     _createClass(Posts, [{
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.getMorePosts = null;
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
             var that = this;
@@ -25860,7 +25866,7 @@ var Posts = function (_React$Component) {
 
             // build scene
             var scene = new ScrollMagic.Scene({ triggerElement: "#colophon", triggerHook: "onEnter" }).addTo(that.state.controller).on("enter", function (e) {
-                if (that.state.getPosts) {
+                if (that.state.getPosts && that.getMorePosts !== null) {
                     that.getMorePosts();
                 }
             });
@@ -26109,10 +26115,6 @@ var _notFound = __webpack_require__(87);
 
 var _notFound2 = _interopRequireDefault(_notFound);
 
-var _placeholder = __webpack_require__(23);
-
-var _placeholder2 = _interopRequireDefault(_placeholder);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26179,7 +26181,7 @@ var Post = function (_React$Component) {
                                 this.state.post.published_date
                             )
                         ),
-                        _react2.default.createElement('img', { className: 'featured-image', src: this.state.post.featured_image_src ? this.state.post.featured_image_src : _placeholder2.default, alt: 'featured image' }),
+                        this.state.post.featured_image_src ? _react2.default.createElement('img', { className: 'featured-image', src: this.state.post.featured_image_src, alt: 'featured image' }) : null,
                         _react2.default.createElement(
                             'p',
                             { className: 'card-text' },
