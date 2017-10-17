@@ -12,7 +12,8 @@ class Posts extends React.Component {
         this.state = {
             posts: [],
             page: 0,
-            getPosts: true
+            getPosts: true,
+            controller: false
         }
     }
 
@@ -21,18 +22,18 @@ class Posts extends React.Component {
         window.onbeforeunload = function () { window.scrollTo(0, 0); }
 
         // init controller
-        var controller = new ScrollMagic.Controller();
+        that.state.controller = new ScrollMagic.Controller();
 
         // build scene
         var scene = new ScrollMagic.Scene({ triggerElement: "#colophon", triggerHook: "onEnter" })
-            .addTo(controller)
+            .addTo(that.state.controller)
             .on("enter", function (e) {
                 if (that.state.getPosts) {
                     that.getMorePosts();
                 }
             });
     }
-
+    
     getMorePosts() {
         var that = this;
         var totalPages;
