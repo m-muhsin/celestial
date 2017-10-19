@@ -29,22 +29,22 @@ class Products extends React.Component {
     }
 
     componentDidUpdate() {
-        var controller2 = new ScrollMagic.Controller();
-        jQuery('.container .col-sm-4.card-outer').each(function () {
+        var fadeInController = new ScrollMagic.Controller();
+        jQuery('.container .col-md-4.card-outer').each(function () {
             var ourScene2 = new ScrollMagic.Scene({
                 triggerElement: this.children[0],
                 reverse: false,
                 triggerHook: 1
             })
                 .setClassToggle(this, 'fade-in')
-                .addTo(controller2);
+                .addTo(fadeInController);
         });
     }
 
     renderProducts() {
         return this.state.products.map((product, i) => {
             return (
-                <div className="col-sm-4 card-outer" key={i}>
+                <div className="col-md-4 card-outer" key={i}>
                     <div className="card">
                         <div className="img-outer">
                             <Link to={product.slug}>

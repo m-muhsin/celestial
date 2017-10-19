@@ -8,7 +8,7 @@ class PostList extends React.Component {
     renderPosts() {
         return this.props.posts.map((post, i) => {
             return (
-                <div className="col-sm-4 card-outer" key={i}>
+                <div className="col-md-4 card-outer" key={i}>
                     <div className="card">
                         <div className="img-outer">
                             <Link to={'posts/' + post.slug}>

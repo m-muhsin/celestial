@@ -26,7 +26,7 @@ class Posts extends React.Component {
         var that = this;
         window.onbeforeunload = function () { window.scrollTo(0, 0); }
 
-        // init controller
+        // init ScrollMagic Controller
         that.state.controller = new ScrollMagic.Controller();
 
         // build scene
@@ -42,13 +42,17 @@ class Posts extends React.Component {
     getMorePosts() {
         var that = this;
         var totalPages;
+
         // adding a loader
         jQuery("#loader").addClass("active");
+        
         this.setState({ page: this.state.page + 1 });
 
         fetch(CelestialSettings.URL.api + "/posts/?page=" + this.state.page)
             .then(function (response) {
                 for (var pair of response.headers.entries()) {
+
+                    // getting the total number of pages
                     if (pair[0] == 'x-wp-totalpages') {
                         totalPages = pair[1];
                     }
@@ -68,6 +72,8 @@ class Posts extends React.Component {
                     allPosts.push(single);
                 })
                 that.setState({ posts: allPosts });
+
+                // removing the loader
                 jQuery("#loader").removeClass("active");
 
             }).catch(function (error) {
@@ -77,17 +83,17 @@ class Posts extends React.Component {
     }
 
     componentDidUpdate() {
-        var controller2 = new ScrollMagic.Controller();
-        jQuery('.posts-container .col-sm-4.card-outer').each(function () {
+        var FadeInController = new ScrollMagic.Controller();
+        jQuery('.posts-container .col-md-4.card-outer').each(function () {
 
             // build a scene
-            var ourScene2 = new ScrollMagic.Scene({
+            var FadeInScene = new ScrollMagic.Scene({
                 triggerElement: this.children[0],
                 reverse: false,
                 triggerHook: 1
             })
                 .setClassToggle(this, 'fade-in')
-                .addTo(controller2);
+                .addTo(FadeInController);
         });
     }
 

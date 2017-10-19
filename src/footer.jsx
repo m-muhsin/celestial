@@ -7,7 +7,6 @@ function Footer() {
                 Celestial Theme 2017
             </div>
         </footer>
-
     );
 }
 

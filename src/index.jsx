@@ -20,9 +20,9 @@ const App = () => (
         <Header />
         <Switch>
             <Route exact path={CelestialSettings.path} component={Posts} />
+            <Route exact path={CelestialSettings.path + 'posts/:slug'} component={Post} />
             <Route exact path={CelestialSettings.path + 'products'} component={Products} />
             <Route exact path={CelestialSettings.path + 'products/:product'} component={Product} />
-            <Route exact path={CelestialSettings.path + 'posts/:slug'} component={Post} />
             <Route path="*" component={NotFound} />
         </Switch>
         <Footer />
