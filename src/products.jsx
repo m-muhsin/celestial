@@ -64,15 +64,11 @@ class Products extends React.Component {
 
     renderEmpty() {
         return (
-            <div id="content">
-                <div className="container post-entry">
-                    <div className="card">
-                        <div className="card-body">
-                            <h4 className="card-title">404 Page Not Found!</h4>
-                            <p className="card-text">The page you requested does not exist.</p>
-                            <p className="card-text"><Link to={CelestialSettings.path}>Return to homepage</Link></p>
-                        </div>
-                    </div>
+            <div className="card">
+                <div className="card-body">
+                    <h4 className="card-title">404 Page Not Found!</h4>
+                    <p className="card-text">The page you requested does not exist.</p>
+                    <p className="card-text"><Link to={CelestialSettings.path}>Return to homepage</Link></p>
                 </div>
             </div>
         );
@@ -80,13 +76,11 @@ class Products extends React.Component {
 
     render() {
         return (
-            <div id="content">
-                <div className="container">
-                    {this.state.products ?
-                        this.renderProducts() :
-                        this.renderEmpty()
-                    }
-                </div>
+            <div className="container post-entry">
+                {this.state.products ?
+                    this.renderProducts() :
+                    this.renderEmpty()
+                }
             </div>
         );
     }

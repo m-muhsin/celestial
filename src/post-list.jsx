@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Placeholder from './placeholder.jpg';
+import NotFound from './not-found';
 
 class PostList extends React.Component {
 
@@ -28,7 +29,7 @@ class PostList extends React.Component {
 
     renderEmpty() {
         return (
-            <div>EMPTY</div>
+            <NotFound />
         )
     }
 

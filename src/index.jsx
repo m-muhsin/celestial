@@ -18,13 +18,15 @@ require('./style.scss');
 const App = () => (
     <div id="page-inner">
         <Header />
-        <Switch>
-            <Route exact path={CelestialSettings.path} component={Posts} />
-            <Route exact path={CelestialSettings.path + 'posts/:slug'} component={Post} />
-            <Route exact path={CelestialSettings.path + 'products'} component={Products} />
-            <Route exact path={CelestialSettings.path + 'products/:product'} component={Product} />
-            <Route path="*" component={NotFound} />
-        </Switch>
+        <div id="content">
+            <Switch>
+                <Route exact path={CelestialSettings.path} component={Posts} />
+                <Route exact path={CelestialSettings.path + 'posts/:slug'} component={Post} />
+                <Route exact path={CelestialSettings.path + 'products'} component={Products} />
+                <Route exact path={CelestialSettings.path + 'products/:product'} component={Product} />
+                <Route path="*" component={NotFound} />
+            </Switch>
+        </div>
         <Footer />
     </div>
 

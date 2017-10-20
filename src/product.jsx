@@ -1,7 +1,6 @@
 import React from 'react';
 import NotFound from './not-found';
 import { Link } from 'react-router-dom';
-import Placeholder from './placeholder.jpg';
 
 class Product extends React.Component {
 
@@ -29,18 +28,16 @@ class Product extends React.Component {
             });
     }
 
-    renderPosts() {
+    renderProduct() {
         return (
-            <div className="container post-entry">
-                <div className="card">
-                    <div className="card-body">
-                        <div className="col-sm-4"><img className="product-image" src={this.state.product.images ? this.state.product.images[0].src : Placeholder} alt={this.state.product.images ? this.state.product.images[0].alt : 'Placeholder Image'} /></div>
-                        <div className="col-sm-8">
-                            <h4 className="card-title">{this.state.product.name}</h4>
-                            <p className="card-text"><strike>${this.state.product.regular_price}</strike> <u>${this.state.product.sale_price}</u></p>
-                            <p className="card-text"><small className="text-muted">{this.state.product.stock_quantity} in stock</small></p>
-                            <p className="card-text">{jQuery(this.state.product.description).text()}</p>
-                        </div>
+            <div className="card">
+                <div className="card-body">
+                    <div className="col-sm-4"><img className="product-image" src={this.state.product.images ? this.state.product.images[0].src : null} alt={this.state.product.images ? this.state.product.images[0].alt : null } /></div>
+                    <div className="col-sm-8">
+                        <h4 className="card-title">{this.state.product.name}</h4>
+                        <p className="card-text"><strike>${this.state.product.regular_price}</strike> <u>${this.state.product.sale_price}</u></p>
+                        <p className="card-text"><small className="text-muted">{this.state.product.stock_quantity} in stock</small></p>
+                        <p className="card-text">{jQuery(this.state.product.description).text()}</p>
                     </div>
                 </div>
             </div>
@@ -55,9 +52,9 @@ class Product extends React.Component {
 
     render() {
         return (
-            <div id="content">
+            <div className="container post-entry">
                 {this.state.product ?
-                    this.renderPosts() :
+                    this.renderProduct() :
                     this.renderEmpty()
                 }
             </div>
