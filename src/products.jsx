@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LoadingIcon from './loading-icon.gif';
 import Placeholder from './placeholder.jpg';
 
 class Products extends React.Component {
@@ -7,25 +8,79 @@ class Products extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            products: []
+            products: [],
+            page: 0,
+            getProducts: true,
+            controller: false
         }
+        this.getMoreProducts = this.getMoreProducts.bind(this);
+    }
+
+    componentWillUnmount() {
+        this.getMoreProducts = null;
     }
 
     componentDidMount() {
         var that = this;
-        var url = window.location.href.split('/');
-        var slug = url.pop() || url.pop();
 
-        fetch(CelestialSettings.woo.url + "products?consumer_key=" + CelestialSettings.woo.consumer_key + "&consumer_secret=" + CelestialSettings.woo.consumer_secret)
+        // init ScrollMagic Controller
+        that.state.controller = new ScrollMagic.Controller();
+
+        // build scene
+        var scene = new ScrollMagic.Scene({ triggerElement: "#colophon", triggerHook: "onEnter" })
+            .addTo(that.state.controller)
+            .on("enter", function (e) {
+                if (that.state.getProducts && that.getMoreProducts !== null) {
+                    that.getMoreProducts();
+                }
+            });
+
+
+    }
+
+    getMoreProducts() {
+        var that = this;
+        var totalPages;
+
+        // adding a loader
+        jQuery("#loader").addClass("active");
+
+        this.setState({ page: this.state.page + 1 });
+
+        fetch(CelestialSettings.woo.url + "products?page=" + this.state.page + "&consumer_key=" + CelestialSettings.woo.consumer_key + "&consumer_secret=" + CelestialSettings.woo.consumer_secret)
             .then(function (response) {
+                for (var pair of response.headers.entries()) {
+
+                    // getting the total number of pages
+                    if (pair[0] == 'x-wp-totalpages') {
+                        totalPages = pair[1];
+                    }
+
+                    if (that.state.page >= totalPages) {
+                        that.setState({ getProducts: false })
+                    }
+                }
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
+                
                 return response.json();
             })
-            .then(function (res) {
-                that.setState({ products: res })
+            .then(function (results) {
+                var allProducts = that.state.products.slice();
+                results.forEach(function (single) {
+                    allProducts.push(single);
+                })
+                that.setState({ products: allProducts });
+
+                // removing the loader
+                jQuery("#loader").removeClass("active");
+
+            }).catch(function (error) {
+                console.log('There has been a problem with your fetch operation: ' + error.message);
+                jQuery("#loader").remove();
             });
+
     }
 
     componentDidUpdate() {
@@ -81,6 +136,7 @@ class Products extends React.Component {
                     this.renderProducts() :
                     this.renderEmpty()
                 }
+                <img src={LoadingIcon} alt="loader gif" id="loader" />
             </div>
         );
     }

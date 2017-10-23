@@ -107,7 +107,6 @@ class Posts extends React.Component {
                     <h1 className="posts-title">Posts</h1>
                     <PostList posts={this.state.posts} />
                 </div>
-                <div id="below-posts"></div>
                 <img src={LoadingIcon} alt="loader gif" id="loader" />
             </div>
         );
