@@ -29,7 +29,6 @@ function celestial_scripts() {
 		'URL' => array(
 			'api' => esc_url_raw( get_rest_url( null, '/wp/v2' ) ),
 			'root' => esc_url_raw( $url ),
-			'frontPage' => get_option( 'page_on_front' ),
 		),
 		'woo' => array(
 			'url' => esc_url_raw( 'https://localhost/celestial/wp-json/wc/v2/' ),

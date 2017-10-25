@@ -1012,8 +1012,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -1022,64 +1020,43 @@ var _reactRouterDom = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var NotFound = function (_React$Component) {
-    _inherits(NotFound, _React$Component);
-
-    function NotFound() {
-        _classCallCheck(this, NotFound);
-
-        return _possibleConstructorReturn(this, (NotFound.__proto__ || Object.getPrototypeOf(NotFound)).apply(this, arguments));
-    }
-
-    _createClass(NotFound, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
+var NotFound = function NotFound() {
+    return _react2.default.createElement(
+        'div',
+        { id: 'content' },
+        _react2.default.createElement(
+            'div',
+            { className: 'container post-entry' },
+            _react2.default.createElement(
                 'div',
-                { id: 'content' },
+                { className: 'card' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'container post-entry' },
+                    { className: 'card-body' },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'card' },
+                        'h4',
+                        { className: 'card-title' },
+                        '404 Page Not Found!'
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        { className: 'card-text' },
+                        'The page you requested does not exist.'
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        { className: 'card-text' },
                         _react2.default.createElement(
-                            'div',
-                            { className: 'card-body' },
-                            _react2.default.createElement(
-                                'h4',
-                                { className: 'card-title' },
-                                '404 Page Not Found!'
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'card-text' },
-                                'The page you requested does not exist.'
-                            ),
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'card-text' },
-                                _react2.default.createElement(
-                                    _reactRouterDom.Link,
-                                    { to: CelestialSettings.path },
-                                    'Return to homepage'
-                                )
-                            )
+                            _reactRouterDom.Link,
+                            { to: CelestialSettings.path },
+                            'Return to homepage'
                         )
                     )
                 )
-            );
-        }
-    }]);
-
-    return NotFound;
-}(_react2.default.Component);
+            )
+        )
+    );
+};
 
 exports.default = NotFound;
 
@@ -25760,8 +25737,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -25770,78 +25745,57 @@ var _reactRouterDom = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Header = function (_React$Component) {
-    _inherits(Header, _React$Component);
-
-    function Header() {
-        _classCallCheck(this, Header);
-
-        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
-    }
-
-    _createClass(Header, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                { className: 'container' },
+var Header = function Header() {
+    return _react2.default.createElement(
+        'div',
+        { className: 'container' },
+        _react2.default.createElement(
+            'header',
+            { id: 'masthead', className: 'site-header', role: 'banner' },
+            _react2.default.createElement(
+                'nav',
+                { className: 'navbar navbar-expand-lg navbar-light ' },
                 _react2.default.createElement(
-                    'header',
-                    { id: 'masthead', className: 'site-header', role: 'banner' },
+                    'h1',
+                    { className: 'site-title' },
                     _react2.default.createElement(
-                        'nav',
-                        { className: 'navbar navbar-expand-lg navbar-light ' },
+                        _reactRouterDom.Link,
+                        { to: CelestialSettings.path },
+                        'Celestial'
+                    )
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { className: 'navbar-toggler', type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbarNavAltMarkup', 'aria-controls': 'navbarNavAltMarkup', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' },
+                    _react2.default.createElement('span', { className: 'navbar-toggler-icon' })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'collapse navbar-collapse', id: 'navbarNavAltMarkup' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'navbar-nav' },
                         _react2.default.createElement(
-                            'h1',
-                            { className: 'site-title' },
+                            _reactRouterDom.Link,
+                            { className: 'nav-item nav-link active', to: CelestialSettings.path },
+                            'Home ',
                             _react2.default.createElement(
-                                _reactRouterDom.Link,
-                                { to: CelestialSettings.path },
-                                'Celestial'
+                                'span',
+                                { className: 'sr-only' },
+                                '(current)'
                             )
                         ),
                         _react2.default.createElement(
-                            'button',
-                            { className: 'navbar-toggler', type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbarNavAltMarkup', 'aria-controls': 'navbarNavAltMarkup', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' },
-                            _react2.default.createElement('span', { className: 'navbar-toggler-icon' })
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'collapse navbar-collapse', id: 'navbarNavAltMarkup' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'navbar-nav' },
-                                _react2.default.createElement(
-                                    _reactRouterDom.Link,
-                                    { className: 'nav-item nav-link active', to: CelestialSettings.path },
-                                    'Home ',
-                                    _react2.default.createElement(
-                                        'span',
-                                        { className: 'sr-only' },
-                                        '(current)'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    _reactRouterDom.Link,
-                                    { className: 'nav-item nav-link', to: CelestialSettings.path + "products/" },
-                                    'Products'
-                                )
-                            )
+                            _reactRouterDom.Link,
+                            { className: 'nav-item nav-link', to: CelestialSettings.path + "products/" },
+                            'Products'
                         )
                     )
                 )
-            );
-        }
-    }]);
-
-    return Header;
-}(_react2.default.Component);
+            )
+        )
+    );
+};
 
 exports.default = Header;
 
@@ -25862,7 +25816,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Footer() {
+var Footer = function Footer() {
     return _react2.default.createElement(
         "footer",
         { id: "colophon", className: "container" },
@@ -25872,7 +25826,7 @@ function Footer() {
             "Celestial Theme 2017"
         )
     );
-}
+};
 
 exports.default = Footer;
 
