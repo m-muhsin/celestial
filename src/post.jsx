@@ -31,12 +31,12 @@ class Post extends React.Component {
         return (
             <div className="card">
                 <div className="card-body">
-                    <h4 className="card-title">{this.state.post.rendered_title}</h4>
+                    <h4 className="card-title">{this.state.post.title.rendered}</h4>
                     <p className="card-text"><small className="text-muted">{this.state.post.author_name} &ndash; {this.state.post.published_date}</small></p>
                     {
                         this.state.post.featured_image_src ? <img className="featured-image" src={this.state.post.featured_image_src} alt="featured image" /> : null
                     }
-                    <p className="card-text">{this.state.post.rendered_content}</p>
+                    <p className="card-text">{this.state.post.content.rendered}</p>
                 </div>
             </div>
         )
