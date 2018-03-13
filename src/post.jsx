@@ -36,7 +36,7 @@ class Post extends React.Component {
                     {
                         this.state.post.featured_image_src ? <img className="featured-image" src={this.state.post.featured_image_src} alt="featured image" /> : null
                     }
-                    <p className="card-text">{this.state.post.content.rendered}</p>
+                    <p className="card-text" dangerouslySetInnerHTML={{ __html: this.state.post.content.rendered }}  />
                 </div>
             </div>
         )
@@ -49,9 +49,10 @@ class Post extends React.Component {
     }
 
     render() {
+        console.log('this.state.post',this.state.post)
         return (
             <div className="container post-entry">
-                {this.state.post ?
+                {this.state.post.title ?
                     this.renderPosts() :
                     this.renderEmpty()
                 }
