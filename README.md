@@ -1,5 +1,9 @@
 # Celestial theme
-A WordPress theme using React 16, Bootstrap 4 and Webpack 3
+A WordPress theme using React 16, Bootstrap 4 and Webpack 3.
+
+This is a support project of the article I wrote for Smashing Magazine. https://www.smashingmagazine.com/2018/03/react-wordpress-web-app
+
+I intend to continue developing the project by building the Next Steps of the article in the **'next-steps'** branch.
 
 ![screenshot](screenshot.jpg)
 
@@ -12,23 +16,14 @@ The following pre-requisites should be in place for the theme to work:
 2. Posts permalink set set to: Custom Structure - /posts/%postname%/
 3. Products permalink to be set as: Custom base - /products/
 
-Installing
------------
+Installing and beginning development
+------------------------------------
 
-1. Download this theme into your WordPress instance's 'themes' folder
-2. Head over to Appearances > Themes in your WordPress Dashboard
-3. Select 'Celestial'
-
-Development
------------
-
-To continue developing Celestial:
-
-
-	git clone https://github.com/m-muhsin/celestial celestial
-    cd celestial
-    npm install
-    webpack
+1. git clone https://github.com/m-muhsin/celestial
+2. cd celestial
+3. npm install
+4. npm run build
+5. Head over to Appearances > Themes in your WordPress Dashboard and Select 'Celestial'
 
 Now you can continue developing the Celestial theme. All the best!
 
