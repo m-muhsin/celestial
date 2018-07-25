@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Placeholder from './placeholder.jpg';
 import NotFound from './not-found';
+import LoadingIcon from "./loading-icon.gif";
 
 class PostList extends React.Component {
 
@@ -19,7 +20,7 @@ class PostList extends React.Component {
                         <div className="card-body">
                             <h4 className="card-title"><Link to={'posts/' + post.slug}>{post.title.rendered}</Link></h4>
                             <p className="card-text"><small className="text-muted">{post.author_name} &ndash; {post.published_date}</small></p>
-                            <p>{jQuery(post.excerpt.rendered).text()}</p>
+                            <p dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
                         </div>
                     </div>
                 </div>
@@ -28,9 +29,7 @@ class PostList extends React.Component {
     }
 
     renderEmpty() {
-        return (
-            <NotFound />
-        )
+        return <img src={LoadingIcon} alt="loader gif" className="active" id="loader" />;
     }
 
     render() {
