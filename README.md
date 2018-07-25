@@ -3,7 +3,7 @@ A WordPress theme using React 16, Bootstrap 4 and Webpack 3.
 
 This is a support project of the article I wrote for Smashing Magazine. https://www.smashingmagazine.com/2018/03/react-wordpress-web-app
 
-Update (July 24, 2018):
+Update (July 25, 2018):
 1. Got rid of jQuery and other enqueued script files
 2. Updated footer with dynamic year and center text
 3. Used the Loader where appropriate
