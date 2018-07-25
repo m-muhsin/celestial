@@ -37,7 +37,7 @@ class Product extends React.Component {
                         <h4 className="card-title">{this.state.product.name}</h4>
                         <p className="card-text"><strike>${this.state.product.regular_price}</strike> <u>${this.state.product.sale_price}</u></p>
                         <p className="card-text"><small className="text-muted">{this.state.product.stock_quantity} in stock</small></p>
-                        <p className="card-text">{jQuery(this.state.product.description).text()}</p>
+                        <p className="card-text" dangerouslySetInnerHTML={{ __html: this.state.product.description }} />
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LoadingIcon from './loading-icon.gif';
 import Placeholder from './placeholder.jpg';
+import NotFound from './not-found';
 
 class Products extends React.Component {
 
@@ -34,16 +35,11 @@ class Products extends React.Component {
                     that.getMoreProducts();
                 }
             });
-
-
     }
 
     getMoreProducts() {
         var that = this;
         var totalPages;
-
-        // adding a loader
-        jQuery("#loader").addClass("active");
 
         this.setState({ page: this.state.page + 1 });
 
@@ -73,25 +69,21 @@ class Products extends React.Component {
                 })
                 that.setState({ products: allProducts });
 
-                // removing the loader
-                jQuery("#loader").removeClass("active");
-
             }).catch(function (error) {
                 console.log('There has been a problem with your fetch operation: ' + error.message);
-                jQuery("#loader").remove();
             });
 
     }
 
     componentDidUpdate() {
         var fadeInController = new ScrollMagic.Controller();
-        jQuery('.container .col-md-4.card-outer').each(function () {
+        document.querySelectorAll('.container .col-md-4.card-outer').forEach(function (item) {
             var ourScene2 = new ScrollMagic.Scene({
-                triggerElement: this.children[0],
+                triggerElement: item.children[0],
                 reverse: false,
                 triggerHook: 1
             })
-                .setClassToggle(this, 'fade-in')
+                .setClassToggle(item, 'fade-in')
                 .addTo(fadeInController);
         });
     }
@@ -109,7 +101,7 @@ class Products extends React.Component {
                         <div className="card-body">
                             <h4 className="card-title"><Link to={product.slug}>{product.name}</Link></h4>
                             <p className="card-text"><small className="text-muted">$ {product.price}</small></p>
-                            <p>{jQuery(product.description).text()}</p>
+                            <p dangerouslySetInnerHTML={{ __html: product.description }} />
                         </div>
                     </div>
                 </div>
@@ -119,13 +111,7 @@ class Products extends React.Component {
 
     renderEmpty() {
         return (
-            <div className="card">
-                <div className="card-body">
-                    <h4 className="card-title">404 Page Not Found!</h4>
-                    <p className="card-text">The page you requested does not exist.</p>
-                    <p className="card-text"><Link to={CelestialSettings.path}>Return to homepage</Link></p>
-                </div>
-            </div>
+            <NotFound />
         );
     }
 
@@ -136,7 +122,7 @@ class Products extends React.Component {
                     this.renderProducts() :
                     this.renderEmpty()
                 }
-                <img src={LoadingIcon} alt="loader gif" id="loader" />
+                <img src={LoadingIcon} alt="loader active gif" id="loader" />
             </div>
         );
     }
