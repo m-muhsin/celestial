@@ -19,17 +19,17 @@ Setup
 The following pre-requisites should be in place for the theme to work:
 
 1. WordPress version 4.7 or later
-2. Posts permalink set set to: Custom Structure - /posts/%postname%/
-3. Products permalink to be set as: Custom base - /products/
+2. Posts permalink set set to: Custom Structure - `/posts/%postname%/`
+3. Products permalink to be set as: Custom base - `/products/`
 
 Installing and beginning development
 ------------------------------------
 
-1. git clone https://github.com/m-muhsin/celestial
-2. cd celestial
-3. npm install
-4. npm run build
-5. Head over to Appearances > Themes in your WordPress Dashboard and Select 'Celestial'
+1. `git clone https://github.com/m-muhsin/celestial`
+2. `cd celestial`
+3. `npm install`
+4. `npm run build`
+5. Head over to Appearances > Themes in your WordPress Dashboard and Select `Celestial`
 
 Now you can continue developing the Celestial theme. All the best!
 
