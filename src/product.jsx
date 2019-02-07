@@ -10,29 +10,29 @@ class Product extends React.Component {
   }
 
   componentDidMount() {
-    var that = this;
-    var url = window.location.href.split("/");
-    var slug = url.pop() || url.pop();
+    this.fetchData();
+  }
 
-    fetch(
-      CelestialSettings.woo.url +
-        "products?slug=" +
-        slug +
-        "&consumer_key=" +
-        CelestialSettings.woo.consumer_key +
-        "&consumer_secret=" +
-        CelestialSettings.woo.consumer_secret
-    )
-      .then(function(response) {
+  fetchData = () => {
+    const url = window.location.href.split("/");
+    const slug = url.pop() || url.pop();
+    const fetchUrl = `${
+      CelestialSettings.woo.url
+    }products?slug=${slug}&consumer_key=${
+      CelestialSettings.woo.consumer_key
+    }&consumer_secret=${CelestialSettings.woo.consumer_secret}`;
+
+    fetch(fetchUrl)
+      .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
         return response.json();
       })
-      .then(function(res) {
-        that.setState({ product: res[0] });
+      .then(res => {
+        this.setState({ product: res[0] });
       });
-  }
+  };
 
   renderProduct() {
     return (

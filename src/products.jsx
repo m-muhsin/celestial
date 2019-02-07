@@ -21,27 +21,24 @@ class Products extends React.Component {
   }
 
   componentDidMount() {
-    var that = this;
-
     // init ScrollMagic Controller
-    that.state.controller = new ScrollMagic.Controller();
+    this.controller = new ScrollMagic.Controller();
 
     // build scene
-    var scene = new ScrollMagic.Scene({
+    const scene = new ScrollMagic.Scene({
       triggerElement: "#colophon",
       triggerHook: "onEnter"
     })
-      .addTo(that.state.controller)
-      .on("enter", function(e) {
-        if (that.state.getProducts && that.getMoreProducts !== null) {
-          that.getMoreProducts();
+      .addTo(this.controller)
+      .on("enter", e => {
+        if (this.state.getProducts && this.getMoreProducts !== null) {
+          this.getMoreProducts();
         }
       });
   }
 
   getMoreProducts() {
-    var that = this;
-    var totalPages;
+    let totalPages;
 
     this.setState({ page: this.state.page + 1 });
 
@@ -54,15 +51,15 @@ class Products extends React.Component {
         "&consumer_secret=" +
         CelestialSettings.woo.consumer_secret
     )
-      .then(function(response) {
-        for (var pair of response.headers.entries()) {
+      .then(response => {
+        for (const pair of response.headers.entries()) {
           // getting the total number of pages
           if (pair[0] == "x-wp-totalpages") {
             totalPages = pair[1];
           }
 
-          if (that.state.page >= totalPages) {
-            that.setState({ getProducts: false });
+          if (this.state.page >= totalPages) {
+            this.setState({ getProducts: false });
           }
         }
         if (!response.ok) {
@@ -71,12 +68,12 @@ class Products extends React.Component {
 
         return response.json();
       })
-      .then(function(results) {
-        var allProducts = that.state.products.slice();
+      .then(results => {
+        const allProducts = this.state.products.slice();
         results.forEach(function(single) {
           allProducts.push(single);
         });
-        that.setState({ products: allProducts });
+        this.setState({ products: allProducts });
       })
       .catch(function(error) {
         console.log(
@@ -86,11 +83,11 @@ class Products extends React.Component {
   }
 
   componentDidUpdate() {
-    var fadeInController = new ScrollMagic.Controller();
+    const fadeInController = new ScrollMagic.Controller();
     document
       .querySelectorAll(".container .col-md-4.card-outer")
       .forEach(function(item) {
-        var ourScene2 = new ScrollMagic.Scene({
+        const ourScene2 = new ScrollMagic.Scene({
           triggerElement: item.children[0],
           reverse: false,
           triggerHook: 1

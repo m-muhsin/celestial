@@ -10,21 +10,24 @@ class Post extends React.Component {
   }
 
   componentDidMount() {
-    var that = this;
-    var url = window.location.href.split("/");
-    var slug = url.pop() || url.pop();
+    this.fetchData();
+  }
+
+  fetchData = () => {
+    const url = window.location.href.split("/");
+    const slug = url.pop() || url.pop();
 
     fetch(CelestialSettings.URL.api + "posts?slug=" + slug)
-      .then(function(response) {
+      .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
         return response.json();
       })
-      .then(function(res) {
-        that.setState({ post: res[0] });
+      .then(res => {
+        this.setState({ post: res[0] });
       });
-  }
+  };
 
   renderPosts() {
     return (

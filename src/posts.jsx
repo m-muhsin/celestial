@@ -19,43 +19,41 @@ class Posts extends React.Component {
   }
 
   componentDidMount() {
-    var that = this;
     window.onbeforeunload = function() {
       window.scrollTo(0, 0);
     };
 
     // init ScrollMagic Controller
-    that.state.controller = new ScrollMagic.Controller();
+    this.controller = new ScrollMagic.Controller();
 
     // build scene
-    var scene = new ScrollMagic.Scene({
+    const scene = new ScrollMagic.Scene({
       triggerElement: "#colophon",
       triggerHook: "onEnter"
     })
-      .addTo(that.state.controller)
-      .on("enter", function(e) {
-        if (that.state.getPosts && that.getMorePosts !== null) {
-          that.getMorePosts();
+      .addTo(this.controller)
+      .on("enter", e => {
+        if (this.state.getPosts && this.getMorePosts !== null) {
+          this.getMorePosts();
         }
       });
   }
 
   getMorePosts() {
-    var that = this;
-    var totalPages;
+    let totalPages;
 
     this.setState({ page: this.state.page + 1 });
 
     fetch(CelestialSettings.URL.api + "posts/?page=" + this.state.page)
-      .then(function(response) {
-        for (var pair of response.headers.entries()) {
+      .then(response => {
+        for (const pair of response.headers.entries()) {
           // getting the total number of pages
           if (pair[0] == "x-wp-totalpages") {
             totalPages = pair[1];
           }
 
-          if (that.state.page >= totalPages) {
-            that.setState({ getPosts: false });
+          if (this.state.page >= totalPages) {
+            this.setState({ getPosts: false });
           }
         }
         if (!response.ok) {
@@ -63,14 +61,14 @@ class Posts extends React.Component {
         }
         return response.json();
       })
-      .then(function(results) {
-        var allPosts = that.state.posts.slice();
-        results.forEach(function(single) {
+      .then(results => {
+        const allPosts = this.state.posts.slice();
+        results.forEach(single => {
           allPosts.push(single);
         });
-        that.setState({ posts: allPosts });
+        this.setState({ posts: allPosts });
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log(
           "There has been a problem with your fetch operation: " + error.message
         );
@@ -79,12 +77,12 @@ class Posts extends React.Component {
 
   componentDidUpdate() {
     // use ScrollMagic for infinite scrolling
-    var FadeInController = new ScrollMagic.Controller();
+    const FadeInController = new ScrollMagic.Controller();
     document
       .querySelectorAll(".posts-container .col-md-4.card-outer")
       .forEach(function(item) {
         // build a scene
-        var FadeInScene = new ScrollMagic.Scene({
+        const FadeInScene = new ScrollMagic.Scene({
           triggerElement: item.children[0],
           reverse: false,
           triggerHook: 1

@@ -10,23 +10,26 @@ class Page extends React.Component {
   }
 
   componentDidMount() {
-    var that = this;
-    var url = window.location.href.split("/");
-    var slug = url.pop() || url.pop();
+    this.fetchData();
+  }
 
-    fetch(CelestialSettings.URL.api + "pages?slug=" + slug)
-      .then(function(response) {
+  fetchData = () => {
+    const url = window.location.href.split("/");
+    const slug = url.pop() || url.pop();
+
+    fetch(`${CelestialSettings.URL.api}pages?slug=${slug}`)
+      .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
         return response.json();
       })
-      .then(function(res) {
-        that.setState({ page: res[0] });
+      .then(res => {
+        this.setState({ page: res[0] });
       });
-  }
+  };
 
-  renderPosts() {
+  renderPage() {
     if (this.state.page.title) {
       return (
         <article className="card">
@@ -54,7 +57,7 @@ class Page extends React.Component {
     console.log("this.state.page", this.state.page);
     return (
       <div className="container post-entry">
-        {this.state.page ? this.renderPosts() : this.renderEmpty()}
+        {this.state.page ? this.renderPage() : this.renderEmpty()}
       </div>
     );
   }
