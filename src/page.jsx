@@ -30,12 +30,12 @@ class Post extends React.Component {
     renderPosts() {
         if(this.state.page.title) {
             return (
-                <div className="card">
+                <article className="card">
                     <div className="card-body">
                         <h4 className="card-title">{this.state.page.title.rendered}</h4>
                         <p className="card-text" dangerouslySetInnerHTML={{ __html: this.state.page.content.rendered }}  />
                     </div>
-                </div>
+                </article>
             )
         } else {
             this.renderEmpty();

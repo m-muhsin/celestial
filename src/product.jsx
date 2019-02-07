@@ -30,7 +30,7 @@ class Product extends React.Component {
 
     renderProduct() {
         return (
-            <div className="card">
+            <article className="card">
                 <div className="card-body">
                     <div className="col-sm-4"><img className="product-image" src={this.state.product.images ? this.state.product.images[0].src : null} alt={this.state.product.images ? this.state.product.images[0].alt : null } /></div>
                     <div className="col-sm-8">
@@ -40,7 +40,7 @@ class Product extends React.Component {
                         <p className="card-text" dangerouslySetInnerHTML={{ __html: this.state.product.description }} />
                     </div>
                 </div>
-            </div>
+            </article>
         );
     }
 

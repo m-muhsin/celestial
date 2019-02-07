@@ -2,7 +2,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Placeholder from './placeholder.jpg';
-import NotFound from './not-found';
 import LoadingIcon from "./loading-icon.gif";
 
 class PostList extends React.Component {
@@ -10,7 +9,7 @@ class PostList extends React.Component {
     renderPosts() {
         return this.props.posts.map((post, i) => {
             return (
-                <div className="col-md-4 card-outer" key={i}>
+                <article className="col-md-4 card-outer" key={i}>
                     <div className="card">
                         <div className="img-outer">
                             <Link to={'posts/' + post.slug}>
@@ -23,7 +22,7 @@ class PostList extends React.Component {
                             <p dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
                         </div>
                     </div>
-                </div>
+                </article>
             )
         });
     }

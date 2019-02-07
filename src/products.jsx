@@ -91,7 +91,7 @@ class Products extends React.Component {
     renderProducts() {
         return this.state.products.map((product, i) => {
             return (
-                <div className="col-md-4 card-outer" key={i}>
+                <article className="col-md-4 card-outer" key={i}>
                     <div className="card">
                         <div className="img-outer">
                             <Link to={product.slug}>
@@ -104,7 +104,7 @@ class Products extends React.Component {
                             <p dangerouslySetInnerHTML={{ __html: product.description }} />
                         </div>
                     </div>
-                </div>
+                </article>
             )
         });
     }

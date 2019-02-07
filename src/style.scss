@@ -10,7 +10,7 @@ body, div#page-inner {  /* Will not work on IE if body is ommitted */
     min-height: 100vh;
 }
 
-div#content {
+#content {
     flex-grow: 1;
 }
 
@@ -38,13 +38,6 @@ div#content {
 }
 footer#colophon {
     background-color: #fff;
-}
-
-.aseel-front-page.has-header-image .custom-header-media,
-.aseel-front-page.has-header-video .custom-header-media,
-.home.blog.has-header-image .custom-header-media,
-.home.blog.has-header-video .custom-header-media {
-	height: 25vh !important;
 }
 
 #primary #main .post {

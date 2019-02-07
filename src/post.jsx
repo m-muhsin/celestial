@@ -28,7 +28,7 @@ class Post extends React.Component {
 
   renderPosts() {
     return (
-      <div className="card">
+      <article className="card">
         <div className="card-body">
           <h4 className="card-title">{this.state.post.title.rendered}</h4>
           <p className="card-text">
@@ -51,7 +51,7 @@ class Post extends React.Component {
             }}
           />
         </div>
-      </div>
+      </article>
     );
   }
 

@@ -1,8 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PostList from "./post-list";
 import LoadingIcon from "./loading-icon.gif";
-import Placeholder from "./placeholder.jpg";
 
 class Posts extends React.Component {
   constructor(props) {
@@ -80,6 +78,7 @@ class Posts extends React.Component {
   }
 
   componentDidUpdate() {
+    // use ScrollMagic for infinite scrolling
     var FadeInController = new ScrollMagic.Controller();
     document
       .querySelectorAll(".posts-container .col-md-4.card-outer")

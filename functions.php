@@ -31,7 +31,7 @@ function celestial_scripts() {
 			'root' => esc_url_raw( $url ),
 		),
 		'woo' => array(
-			'url' => esc_url_raw( 'https://localhost/celestial/wp-json/wc/v2/' ),
+			'url' => esc_url_raw( 'https://localhost/celestial/wp-json/wc/v2/' ), // hard-code URL since it needs to be HTTPS for WC REST API to work
 			'consumer_key' => 'ck_4c897a273bde1274df0325247804ceeb8b09334d',
 			'consumer_secret' => 'cs_b1f81580f8f03ff383b7d655e889c26464639064'
 		),
