@@ -8,10 +8,7 @@ import Posts from './posts';
 import Post from './post';
 import Products from './products';
 import Product from './product';
-import NotFound from './not-found';
 import Page from './page';
-import LoadingIcon from './loading-icon.gif';
-import Placeholder from './placeholder.jpg';
 
 // Load the Sass file
 require('./style.scss');
