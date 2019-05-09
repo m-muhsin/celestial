@@ -4,6 +4,12 @@
   "description": "A basic theme using the WordPress REST API and React",
   "main": "index.js",
   "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack-cli": "^3.1.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "*",
@@ -15,20 +21,14 @@
     "node-sass": "^4.9.2",
     "path": "^0.12.7",
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "webpack": "^3.6.0"
   },
-  "devDependencies": {
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "webpack-cli": "^3.1.0"
-  },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
     "watch": "webpack --watch",
     "start": "webpack --watch"
   },
